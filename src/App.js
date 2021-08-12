@@ -10,10 +10,20 @@ function App() {
     setConverted(e.target.value.split('').map(e => Math.random() > 0.5 ? e.toLowerCase() : e.toUpperCase()).join(''))
   }
 
+  const copy = () => {
+    const r = document.createRange();
+    r.selectNode(document.getElementById("converted"));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(r);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+  }
+
   return (
     <div className="App">
       <textarea value={original} onChange={handleChange}/>
-      <div>{converted}</div>
+      <button onClick={copy}>Copy</button>
+      <div id="converted">{converted}</div>
     </div>
   );
 }
